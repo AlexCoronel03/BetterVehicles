@@ -1,0 +1,4 @@
+// 1.20.1	2024-04-04T10:44:58.624971	Registries
+4209aa3f9811c24288b21601c5a789c1e7fb5ff8 data/bettervehicles/forge/biome_modifier/add_petroleum_ore.json
+add8fc9643213b8a3995f869d9ac18b5a1aced6d data/bettervehicles/worldgen/configured_feature/petroleum_ore.json
+cd26e41ee9257be86c9dc3b3d748ec4417992994 data/bettervehicles/worldgen/placed_feature/petroleum_ore_placed.json

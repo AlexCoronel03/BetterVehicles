@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "222",
+    "212",
+    "222"
+  ],
+  "key": {
+    "1": {
+      "item": "bettervehicles:wheel"
+    },
+    "2": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "result": {
+    "item": "bettervehicles:nailed_wheels"
+  }
+}

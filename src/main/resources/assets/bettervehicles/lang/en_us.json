@@ -1,0 +1,18 @@
+{
+  "item.bettervehicles.fuel": "Fuel",
+  "item.bettervehicles.wheel": "Wheel",
+  "item.bettervehicles.engine": "Engine",
+  "item.bettervehicles.chassis": "Chassis",
+  "entity.bettervehicles.car": "Car Storage",
+  "block.bettervehicles.solidified_petroleum": "Solidified Petroleum",
+  "block.bettervehicles.fuel_sintetizer": "Fuel Sintetizer",
+  "item.bettervehicles.chestAvaible": "Now you can use the car storage crouching and using right click",
+  "item.bettervehicles.notEnoughSpace": "You don't have enough space, or you can't pick up this car",
+  "item.bettervehicles.car_item": "Compacted Car",
+  "item.bettervehicles.petroleum": "Petroleum",
+  "item.bettervehicles.nailed_wheels": "Nailed Wheels (UPGRADE)",
+  "item.bettervehicles.float": "Float (UPGRADE)",
+  "sounds.bettervehicles.fuel_sintetizer": "Fuel Sintetizer On",
+  "sounds.bettervehicles.engine": "Car On",
+  "creativeTab.items": "Better Vehicles Items"
+}

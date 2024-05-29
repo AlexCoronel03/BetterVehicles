@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "on=true": {
+      "model": "bettervehicles:block/fuel_sintetizer_on", "parent": "minecraft:block/cube_all"
+    },
+    "on=false": {
+      "model": "bettervehicles:block/fuel_sintetizer_off", "parent": "minecraft:block/cube_all"
+    }
+  }
+}

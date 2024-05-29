@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "212",
+    "131",
+    "212"
+  ],
+  "key": {
+    "1": {
+      "item": "minecraft:white_wool"
+    },
+    "2": {
+      "item": "minecraft:orange_wool"
+    },
+    "3": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "result": {
+    "item": "bettervehicles:float"
+  }
+}

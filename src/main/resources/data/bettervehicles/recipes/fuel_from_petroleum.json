@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "bettervehicles:petroleum"
+    },
+    {
+      "item": "bettervehicles:petroleum"
+    },
+    {
+      "item": "bettervehicles:petroleum"
+    },
+    {
+      "item": "bettervehicles:petroleum"
+    }
+  ],
+  "result": {
+    "item": "bettervehicles:fuel"
+  }
+}

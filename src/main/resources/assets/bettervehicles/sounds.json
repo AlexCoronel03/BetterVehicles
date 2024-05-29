@@ -1,0 +1,15 @@
+{
+  "fuel_sintetizer_sound": {
+    "subtitles": "sounds.bettervehicles.fuel_sintetizer",
+    "sounds": [
+      "bettervehicles:fuel_sintetizer_sound"
+    ]
+  },
+
+  "engine_sound": {
+    "subtitles": "sounds.bettervehicles.engine",
+    "sounds": [
+      "bettervehicles:engine_sound"
+    ]
+  }
+}

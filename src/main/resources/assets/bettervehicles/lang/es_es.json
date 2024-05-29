@@ -1,0 +1,18 @@
+{
+  "item.bettervehicles.fuel": "Combustible",
+  "entity.bettervehicles.car": "Almacenamiento del Coche",
+  "block.bettervehicles.solidified_petroleum": "Petroleo Solidificado",
+  "item.bettervehicles.chestAvaible": "Ahora puedes abrir el almacenamiento de tu coche agachandote y usando click derecho",
+  "item.bettervehicles.car_item": "Coche Compactado",
+  "item.bettervehicles.petroleum": "Petroleo",
+  "block.bettervehicles.fuel_sintetizer": "Sintetizador de Combustible",
+  "creativeTab.items": "Objetos Better Vehicles",
+  "item.bettervehicles.nailed_wheels": "Ruedas con Clavos (MEJORA)",
+  "sounds.bettervehicles.fuel_sintetizer": "Fuel Sintetizer Funcionando",
+  "sounds.bettervehicles.engine": "Coche Funcionando",
+  "item.bettervehicles.float": "Flotador (MEJORA)",
+  "item.bettervehicles.notEnoughSpace": "No tienes suficiente espacio o no puedes recoger ese coche",
+  "item.bettervehicles.wheel": "Rueda",
+  "item.bettervehicles.engine": "Motor",
+  "item.bettervehicles.chassis": "Chasis"
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.5,
+  "group": "fuel",
+  "ingredient": {
+    "item": "bettervehicles:solidified_petroleum"
+  },
+  "result": "bettervehicles:petroleum"
+}

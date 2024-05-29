@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "bettervehicles:engine"
+    },
+    {
+      "item": "bettervehicles:wheel"
+    },
+    {
+      "item": "bettervehicles:wheel"
+    },
+    {
+      "item": "bettervehicles:wheel"
+    },
+    {
+      "item": "bettervehicles:wheel"
+    },
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "bettervehicles:chassis"
+    }
+  ],
+  "result": {
+    "item": "bettervehicles:car_item"
+  }
+}
