@@ -13,7 +13,7 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BetterVehicles.MODID);
 
 
-    public static final RegistryObject<Item> ITEM_COMBUSTIBLE = ITEMS.register("fuel", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ITEM_COMBUSTIBLE = ITEMS.register("combustible", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> CHASIS = ITEMS.register("chassis", () -> new Item(new Item.Properties()));
 

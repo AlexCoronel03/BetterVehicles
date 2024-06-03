@@ -8,6 +8,8 @@ import com.example.sonidos.SonidosMod;
 import com.example.sonidos.SonidoLoopInicio;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -350,15 +352,18 @@ public class EntidadCoche extends Entity implements Container{
 
         if (entityData.get(COMBUSTIBLE) > 0 && entityData.get(VELOCIDAD) != 0) {
             entityData.set(COMBUSTIBLE, entityData.get(COMBUSTIBLE) - 1);
-        } else if (entityData.get(COMBUSTIBLE) > 0 && entityData.get(VELOCIDAD) == 0 && getPassengers().size() > 0) {
+            level().addParticle(ParticleTypes.LARGE_SMOKE, getX(), getY(), getZ(), 0, 0.1, 0);
+            level().addParticle(ParticleTypes.FLAME, getX(), getY(), getZ(), 0, 0.1, 0);
+
+        } else if (entityData.get(COMBUSTIBLE) > 0 && entityData.get(VELOCIDAD) == 0 && !getPassengers().isEmpty()) {
             if (tickPersonalizado % 5 == 0) {
                 entityData.set(COMBUSTIBLE, entityData.get(COMBUSTIBLE) - 1);
             }
         }
 
-        if (getPassengers().size()>0) {
+        if (!getPassengers().isEmpty()) {
             Player p = (Player) (getPassengers().get(0));
-            p.displayClientMessage(Component.translatable("item.bettervehicles.fuel").append(": " + entityData.get(COMBUSTIBLE) + " ml") , true);
+            p.displayClientMessage(Component.translatable("item.bettervehicles.combustible").append(": " + entityData.get(COMBUSTIBLE) + " ml") , true);
         }
 
         controlCoche();
@@ -468,12 +473,12 @@ public class EntidadCoche extends Entity implements Container{
         if (player.getItemInHand(hand).getItem().equals(ModItems.ITEM_COMBUSTIBLE.get())) {
             entityData.set(COMBUSTIBLE, entityData.get(COMBUSTIBLE) + 300);
             player.getItemInHand(hand).setCount(player.getItemInHand(hand).getCount() - 1);
-            player.displayClientMessage(Component.translatable("item.bettervehicles.COMBUSTIBLE").append(": " + entityData.get(COMBUSTIBLE) + " ml"), true);
+            player.displayClientMessage(Component.translatable("item.bettervehicles.combustible").append(": " + entityData.get(COMBUSTIBLE) + " ml"), true);
         } else if (player.getItemInHand(hand).getItem().equals(Items.CHEST) && !entityData.get(COFRE)) {
             entityData.set(COFRE, true);
             if (!level().isClientSide) {
                 player.getItemInHand(hand).setCount(player.getItemInHand(hand).getCount() - 1);
-                player.displayClientMessage(Component.translatable("item.bettervehicles.COFREAvaible"), false);
+                player.displayClientMessage(Component.translatable("item.bettervehicles.cofreDisponible"), false);
             }
         } else {
             if (player.isCrouching() && !level().isClientSide && player instanceof ServerPlayer && entityData.get(COFRE)) {
