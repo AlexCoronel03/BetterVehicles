@@ -1,8 +1,8 @@
 {
-  "item.bettervehicles.fuel": "Combustible",
+  "item.bettervehicles.combustible": "Combustible",
   "entity.bettervehicles.car": "Almacenamiento del Coche",
   "block.bettervehicles.solidified_petroleum": "Petroleo Solidificado",
-  "item.bettervehicles.chestAvaible": "Ahora puedes abrir el almacenamiento de tu coche agachandote y usando click derecho",
+  "item.bettervehicles.cofreDisponible": "Ahora puedes abrir el almacenamiento de tu coche agachandote y usando click derecho",
   "item.bettervehicles.car_item": "Coche Compactado",
   "item.bettervehicles.petroleum": "Petroleo",
   "block.bettervehicles.fuel_sintetizer": "Sintetizador de Combustible",
