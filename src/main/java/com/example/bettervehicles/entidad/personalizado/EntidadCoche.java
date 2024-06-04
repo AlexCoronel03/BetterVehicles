@@ -2,6 +2,7 @@ package com.example.bettervehicles.entidad.personalizado;
 
 import com.example.bettervehicles.BetterVehicles;
 import com.example.bettervehicles.item.ModItems;
+import com.example.bettervehicles.item.personalizado.ItemCoche;
 import com.example.bettervehicles.net.ControlMensajesCoche;
 import com.example.bettervehicles.ui.Car.ContenedorCoche;
 import com.example.sonidos.SonidosMod;
@@ -61,8 +62,25 @@ public class EntidadCoche extends Entity implements Container{
 
     private static final EntityDataAccessor<Boolean> FLOTADOR = SynchedEntityData.defineId(EntidadCoche.class, EntityDataSerializers.BOOLEAN);
 
+    private static final EntityDataAccessor<Integer> AGILIDAD_ACUATICA = SynchedEntityData.defineId(EntidadCoche.class, EntityDataSerializers.INT);
+
+    private static final EntityDataAccessor<Integer> VELOCIDAD_DE_ALMA = SynchedEntityData.defineId(EntidadCoche.class, EntityDataSerializers.INT);
+
     protected SimpleContainer INVENTARIO;
 
+    private int nivelAgiAcuatica;
+    private int nivelVelAlma;
+    float maxVel = 1.25F;
+
+    private final ItemStack cocheItemStack;
+
+    public void setNivelAgiAcuatica(int nivelAgiAcuatica) {
+        this.nivelAgiAcuatica = nivelAgiAcuatica;
+    }
+
+    public void setNivelVelAlma(int nivelVelAlma) {
+        this.nivelVelAlma = nivelVelAlma;
+    }
 
     public void updateControls(boolean winput, boolean ainput, boolean dinput, boolean sinput, boolean upinput) {
         boolean cambia = false;
@@ -104,6 +122,7 @@ public class EntidadCoche extends Entity implements Container{
         INVENTARIO = new SimpleContainer(27);
         sls = new SonidoLoopInicio(this, SonidosMod.ENGINE_SOUND.get(), SoundSource.MASTER);
         Minecraft.getInstance().getSoundManager().play(sls);
+        this.cocheItemStack = new ItemStack(ModItems.COCHE.get());
     }
 
 
@@ -119,6 +138,9 @@ public class EntidadCoche extends Entity implements Container{
         entityData.define(COMBUSTIBLE, 0);
         entityData.define(RUEDAS_CLAVOS, false);
         entityData.define(FLOTADOR, false);
+        entityData.define(VELOCIDAD_DE_ALMA, 0);
+        entityData.define(AGILIDAD_ACUATICA, 0);
+
     }
 
     @Override
@@ -142,6 +164,8 @@ public class EntidadCoche extends Entity implements Container{
         entityData.set(COFRE, nbt.getBoolean("COFRE"));
         this.INVENTARIO = new SimpleContainer(27);
         leerInventario(nbt, "INVENTARIO", INVENTARIO);
+        entityData.set(VELOCIDAD_DE_ALMA, nbt.getInt("SoulSpeedLevel"));
+        entityData.set(AGILIDAD_ACUATICA, nbt.getInt("DepthStriderLevel"));
     }
 
     @Override
@@ -149,6 +173,8 @@ public class EntidadCoche extends Entity implements Container{
         nbt.putInt("COMBUSTIBLE", entityData.get(COMBUSTIBLE));
         guardarInventario(nbt, "INVENTARIO", INVENTARIO);
         nbt.putBoolean("COFRE", entityData.get(COFRE));
+        nbt.putInt("DepthStriderLevel", entityData.get(AGILIDAD_ACUATICA));
+        nbt.putInt("SoulSpeedLevel", entityData.get(VELOCIDAD_DE_ALMA));
     }
 
     public static void leerInventario(CompoundTag compound, String nombre, Container inv) {
@@ -171,6 +197,8 @@ public class EntidadCoche extends Entity implements Container{
         ct.putInt("COMBUSTIBLE", entityData.get(COMBUSTIBLE));
         guardarInventario(ct, "INVENTARIO", INVENTARIO);
         ct.putBoolean("COFRE", entityData.get(COFRE));
+        ct.putInt("DepthStriderLevel", this.nivelAgiAcuatica);
+        ct.putInt("SoulSpeedLevel", this.nivelVelAlma);
         return ct;
     }
 
@@ -179,6 +207,9 @@ public class EntidadCoche extends Entity implements Container{
         entityData.set(COFRE, ct.getBoolean("COFRE"));
         this.INVENTARIO = new SimpleContainer(27);
         leerInventario(ct, "INVENTARIO", INVENTARIO);
+        entityData.set(VELOCIDAD_DE_ALMA, ct.getInt("SoulSpeedLevel"));
+        entityData.set(AGILIDAD_ACUATICA, ct.getInt("DepthStriderLevel"));
+
     }
 
     public static void guardarInventario(CompoundTag compound, String nombre, Container inv) {
@@ -224,7 +255,24 @@ public class EntidadCoche extends Entity implements Container{
 
     private void controlCoche() {
 
-        float maxVel = 1.25F;
+        if(isInWater()){
+            if(nivelAgiAcuatica == 1) {
+                maxVel = 1.75F;
+            } else if (nivelAgiAcuatica == 2) {
+                maxVel = 2.0F;
+            } else if (nivelAgiAcuatica == 3) {
+                maxVel = 2.50F;
+            }
+        } else {
+            if(nivelVelAlma == 1) {
+                maxVel = 1.50F;
+            } else if (nivelVelAlma == 2) {
+                maxVel = 1.75F;
+            } else if (nivelVelAlma == 3) {
+                System.out.println("Entro");
+                maxVel = 2.25F;
+            }
+        }
 
         float rotacionDelta = 0;
 
@@ -267,9 +315,26 @@ public class EntidadCoche extends Entity implements Container{
                 frenando = 3;
             }
             if (isInWater()) {
-                entityData.set(VELOCIDAD, entityData.get(VELOCIDAD) + 0.001F * frenando);
+                if(nivelAgiAcuatica == 1) {
+                    entityData.set(VELOCIDAD, entityData.get(VELOCIDAD) + 0.002F * frenando);
+                } else if (nivelAgiAcuatica == 2) {
+                    entityData.set(VELOCIDAD, entityData.get(VELOCIDAD) + 0.0035F * frenando);
+                } else if (nivelAgiAcuatica == 3) {
+                    entityData.set(VELOCIDAD, entityData.get(VELOCIDAD) + 0.0055F * frenando);
+                } else {
+                    entityData.set(VELOCIDAD, entityData.get(VELOCIDAD) + 0.001F * frenando);
+                }
             } else {
-                entityData.set(VELOCIDAD, entityData.get(VELOCIDAD) + 0.005F * frenando);
+                if(nivelVelAlma == 1) {
+                    entityData.set(VELOCIDAD, entityData.get(VELOCIDAD) + 0.0065F * frenando);
+                } else if (nivelVelAlma == 2) {
+                    entityData.set(VELOCIDAD, entityData.get(VELOCIDAD) + 0.0075F * frenando);
+                } else if (nivelVelAlma == 3) {
+                    entityData.set(VELOCIDAD, entityData.get(VELOCIDAD) + 0.01F * frenando);
+                } else {
+                    entityData.set(VELOCIDAD, entityData.get(VELOCIDAD) + 0.005F * frenando);
+
+                }
             }
         } else if (entityData.get(SINPUT) && getPassengers().size() > 0 && entityData.get(COMBUSTIBLE) > 0) {
             int frenando = 1;
@@ -309,6 +374,11 @@ public class EntidadCoche extends Entity implements Container{
         double mueveX = -Math.sin(rotacionVerticalRadianes) * entityData.get(VELOCIDAD); // Componente X de la velocidad
         double mueveY = Math.cos(rotacionVerticalRadianes) * entityData.get(VELOCIDAD); // Componente Z de la velocidad
         setDeltaMovement(mueveX, vertVELOCIDAD, mueveY);
+        try{
+            getPassengers().get(0).sendSystemMessage(Component.literal("Velocidad: " + entityData.get(VELOCIDAD)));
+        } catch(Exception e){
+
+        }
     }
 
     public int obtenerCombustible() {
@@ -335,7 +405,12 @@ public class EntidadCoche extends Entity implements Container{
     @Override
     public void tick() {
         super.tick();
+        ((ItemCoche) cocheItemStack.getItem()).encantamientosAplicados(cocheItemStack, this);
+        try{
+            level().players().get(0).sendSystemMessage(Component.literal("Max: " + nivelVelAlma));
+        } catch(Exception e){
 
+        }
         if (level().isClientSide) {
             if (getPassengers().size() > 0 || obtenerCombustible() > 0) {
                 comprobarEstadoLoop();

@@ -159,6 +159,9 @@ public class SintetizadorCombustibleEntidadBloque extends BlockEntity implements
         boolean tieneItemParaCraftear = this.manejadorDeItems.getStackInSlot(RANURA_ENTRADA).getItem() == BloquesMod.PETROLEO_SOLIDIFICADO.get().asItem();
         ItemStack resultado = new ItemStack(ModItems.PETROLEO.get());
 
+
+
+
         return tieneItemParaCraftear && puedeInsertarCantidadEnRanuraDeSalida(resultado.getCount()) && puedeInsertarItemEnRanuraDeSalida(resultado.getItem());
     }
 
