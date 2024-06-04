@@ -134,7 +134,7 @@ public class BetterVehicles
 
         
         MinecraftForge.EVENT_BUS.register(new SuscriptorEventos());
-        MinecraftForge.EVENT_BUS.register(this);
+        //MinecraftForge.EVENT_BUS.register(this);
 
         
         modEventBus.addListener(this::addCreative);

@@ -34,13 +34,27 @@ public class ItemCoche extends Item {
     public InteractionResult useOn(UseOnContext pContext) {
         if (!pContext.getLevel().isClientSide) {
             BlockPos bp = pContext.getClickedPos();
-            EntidadCoche car = new EntidadCoche(EntidadMod.COCHE.get(), pContext.getLevel());
+            EntidadCoche coche = new EntidadCoche(EntidadMod.COCHE.get(), pContext.getLevel());
             CompoundTag ct = pContext.getItemInHand().getTag();
+
+            Map<Enchantment, Integer> encantamientos = pContext.getItemInHand().getAllEnchantments();
+            boolean tieneAgiAcuatica = encantamientos.containsKey(Enchantments.DEPTH_STRIDER);
+            boolean tieneVelAlma = encantamientos.containsKey(Enchantments.SOUL_SPEED);
+
             if (ct != null) {
-                car.setNBT(ct);
+                coche.setNBT(ct);
             }
-            car.teleportTo(bp.getX(),bp.getY()+1.3,bp.getZ());
-            pContext.getLevel().addFreshEntity(car);
+
+            if(tieneAgiAcuatica && tieneVelAlma){
+                coche.setNivelAgiAcuatica(encantamientos.getOrDefault(Enchantments.DEPTH_STRIDER, 0));
+                coche.setNivelVelAlma(encantamientos.getOrDefault(Enchantments.SOUL_SPEED, 0));
+            } else if (tieneVelAlma) {
+                coche.setNivelVelAlma(encantamientos.getOrDefault(Enchantments.SOUL_SPEED, 0));
+            } else if (tieneAgiAcuatica) {
+                coche.setNivelAgiAcuatica(encantamientos.getOrDefault(Enchantments.DEPTH_STRIDER, 0));
+            }
+            coche.teleportTo(bp.getX(),bp.getY()+1.3,bp.getZ());
+            pContext.getLevel().addFreshEntity(coche);
             pContext.getItemInHand().setCount(pContext.getItemInHand().getCount() - 1);
         }
 
@@ -80,7 +94,7 @@ public class ItemCoche extends Item {
     }
 
     public void encantamientosAplicados(ItemStack stack, EntidadCoche coche) {
-        Map<Enchantment, Integer> encantamientos = EnchantmentHelper.getEnchantments(stack);
+        Map<Enchantment, Integer> encantamientos = stack.getAllEnchantments();
         boolean tieneAgiAcuatica = encantamientos.containsKey(Enchantments.DEPTH_STRIDER);
         boolean tieneVelAlma = encantamientos.containsKey(Enchantments.SOUL_SPEED);
 
@@ -89,6 +103,7 @@ public class ItemCoche extends Item {
         } catch(Exception e){
 
         }
+
 
         if(tieneAgiAcuatica && tieneVelAlma){
             coche.setNivelAgiAcuatica(encantamientos.getOrDefault(Enchantments.DEPTH_STRIDER, 0));
