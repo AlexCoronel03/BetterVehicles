@@ -52,7 +52,9 @@ public class SintetizadorCombustible extends BaseEntityBlock {
 
     @Override
     public void onRemove(BlockState estado, Level nivel, BlockPos posicion, BlockState nuevoEstado, boolean esMoviendo) {
-        Minecraft.getInstance().getSoundManager().stop();
+        if (nivel.isClientSide) {
+            Minecraft.getInstance().getSoundManager().stop();
+        }
         estado.setValue(ENCENDIDO, false);
         getLightEmission(estado, nivel, posicion);
         if (estado.getBlock() != nuevoEstado.getBlock()) {
@@ -94,9 +96,6 @@ public class SintetizadorCombustible extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level nivel, BlockState estado, BlockEntityType<T> tipoEntidadBloque) {
-        if (nivel.isClientSide()) {
-            return null;
-        }
 
         return createTickerHelper(tipoEntidadBloque, BloquesModEntidades.SINTETIZADOR_DE_COMBUSTIBLE_BE.get(),
                 (nivel1, posicion1, estado1, entidadBloque) -> entidadBloque.tick(nivel1, posicion1, estado1));

@@ -118,7 +118,9 @@ public class EntidadCoche extends Entity implements Container{
         this.setInvulnerable(false);
         this.setMaxUpStep(0.5F);
         INVENTARIO = new SimpleContainer(27);
-        clientConstructor();
+        if (level.isClientSide()) {
+            clientConstructor();
+        }
         this.cocheItemStack = new ItemStack(ModItems.COCHE.get());
     }
 

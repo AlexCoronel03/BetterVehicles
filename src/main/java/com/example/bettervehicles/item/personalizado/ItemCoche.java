@@ -45,12 +45,12 @@ public class ItemCoche extends Item {
                 coche.setNBT(ct);
             }
 
-            if(tieneAgiAcuatica && tieneVelAlma){
+            if(encantamientos.get(Enchantments.SOUL_SPEED) != null && encantamientos.get(Enchantments.DEPTH_STRIDER) != null && encantamientos.get(Enchantments.DEPTH_STRIDER) > 0 && encantamientos.get(Enchantments.SOUL_SPEED) > 0){
                 coche.setNivelAgiAcuatica(encantamientos.getOrDefault(Enchantments.DEPTH_STRIDER, 0));
                 coche.setNivelVelAlma(encantamientos.getOrDefault(Enchantments.SOUL_SPEED, 0));
-            } else if (tieneVelAlma) {
+            } else if (encantamientos.get(Enchantments.SOUL_SPEED) != null && encantamientos.get(Enchantments.SOUL_SPEED) > 0) {
                 coche.setNivelVelAlma(encantamientos.getOrDefault(Enchantments.SOUL_SPEED, 0));
-            } else if (tieneAgiAcuatica) {
+            } else if (encantamientos.get(Enchantments.DEPTH_STRIDER) != null && encantamientos.get(Enchantments.DEPTH_STRIDER) > 0) {
                 coche.setNivelAgiAcuatica(encantamientos.getOrDefault(Enchantments.DEPTH_STRIDER, 0));
             }
             coche.teleportTo(bp.getX(),bp.getY()+1.3,bp.getZ());
@@ -131,7 +131,7 @@ public class ItemCoche extends Item {
     }
 
 
-    @Override
+    /*@Override
     public void readShareTag(ItemStack stack, CompoundTag tag) {
         super.readShareTag(stack, tag);
         if (tag != null) {
@@ -143,4 +143,6 @@ public class ItemCoche extends Item {
             }
         }
     }
+
+     */
 }

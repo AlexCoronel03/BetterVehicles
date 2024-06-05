@@ -44,6 +44,7 @@ public class SuscriptorEventos {
         car.updateControls(MapeoTeclas.wKEY.isDown(), MapeoTeclas.aKEY.isDown(), MapeoTeclas.dKEY.isDown(), MapeoTeclas.sKEY.isDown(), MapeoTeclas.upKEY.isDown());
     }
 
+
     @SubscribeEvent
     public void alAtacarJugador(AttackEntityEvent event) {
 
