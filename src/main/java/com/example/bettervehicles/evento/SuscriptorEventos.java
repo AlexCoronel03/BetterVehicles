@@ -11,17 +11,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ObjectHolder;
 
-@Mod.EventBusSubscriber(modid = BetterVehicles.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = BetterVehicles.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SuscriptorEventos {
-    private static final Component EXAMPLE_KEY_PRESSED =
-            Component.translatable("message." + BetterVehicles.MODID + ".example_key_pressed");
+    //private static final Component EXAMPLE_KEY_PRESSED = Component.translatable("message." + BetterVehicles.MODID + ".example_key_pressed");
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void alPulsarTecla(InputEvent.Key event) {
         Minecraft minecraft = Minecraft.getInstance();
@@ -45,9 +46,6 @@ public class SuscriptorEventos {
 
     @SubscribeEvent
     public void alAtacarJugador(AttackEntityEvent event) {
-        Minecraft minecraft = Minecraft.getInstance();
-
-        Player player = minecraft.player;
 
         if (event.getTarget() instanceof EntidadCoche car) {
             ItemStack item = new ItemStack(ModItems.COCHE.get());

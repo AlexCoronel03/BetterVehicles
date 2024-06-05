@@ -26,6 +26,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -123,8 +124,6 @@ public class BetterVehicles
 
         EntidadMod.registrar(modEventBus);
 
-        SonidosMod.register(modEventBus);
-
         BloquesModEntidades.registrar(modEventBus);
         TiposMenu.register(modEventBus);
 
@@ -134,14 +133,14 @@ public class BetterVehicles
 
         
         MinecraftForge.EVENT_BUS.register(new SuscriptorEventos());
-        //MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(this);
 
-        
+        SonidosMod.register(modEventBus);
         modEventBus.addListener(this::addCreative);
-
         
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
+
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {

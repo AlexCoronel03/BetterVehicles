@@ -118,9 +118,14 @@ public class EntidadCoche extends Entity implements Container{
         this.setInvulnerable(false);
         this.setMaxUpStep(0.5F);
         INVENTARIO = new SimpleContainer(27);
+        clientConstructor();
+        this.cocheItemStack = new ItemStack(ModItems.COCHE.get());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void clientConstructor() {
         sls = new SonidoLoopInicio(this, SonidosMod.ENGINE_SOUND.get(), SoundSource.MASTER);
         Minecraft.getInstance().getSoundManager().play(sls);
-        this.cocheItemStack = new ItemStack(ModItems.COCHE.get());
     }
 
 
@@ -397,6 +402,7 @@ public class EntidadCoche extends Entity implements Container{
         }
         return Minecraft.getInstance().getSoundManager().isActive(sound);
     }
+
 
 
     @Override

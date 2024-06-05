@@ -3,11 +3,11 @@ package com.example.sonidos;
 import com.example.bettervehicles.entidad.personalizado.EntidadCoche;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 
 public abstract class SonidosCocheLoop extends AbstractTickableSoundInstance {
 
@@ -42,7 +42,7 @@ public abstract class SonidosCocheLoop extends AbstractTickableSoundInstance {
             return;
         }
 
-        LocalPlayer player = Minecraft.getInstance().player;
+        Player player = Minecraft.getInstance().player;
         if (player == null || !player.isAlive()) {
             setAcabaSonido();
             return;
